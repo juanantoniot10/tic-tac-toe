@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import vista.Botones;
@@ -30,11 +32,15 @@ public class ParaTresNRayaUI extends TresNRayaUI{
 	}
 
 	private void pintarBotonera() {
+		Icon equis = new ImageIcon("imagenes/equisChica.png");
+		Icon circulo = new ImageIcon("imagenes/circuloChico.png");
+		Icon vacia = new ImageIcon("imagenes/vacia.png");
+		
 		for (int i = 0; i < this.botones.botones.length; i++) {
 			for (int j = 0; j < this.botones.botones[i].length; j++) {
-				if(control.tablero[i][j]==1)botones.botones[i][j].setText("X");
-				if(control.tablero[i][j]==2)botones.botones[i][j].setText("O");
-				if(control.tablero[i][j]==0)botones.botones[i][j].setText(" ");
+				if(control.tablero[i][j]==1)botones.botones[i][j].setIcon(equis);
+				if(control.tablero[i][j]==2)botones.botones[i][j].setIcon(circulo);
+				if(control.tablero[i][j]==0)botones.botones[i][j].setIcon(vacia);
 			}
 		}
 		
@@ -96,10 +102,5 @@ public class ParaTresNRayaUI extends TresNRayaUI{
 			this.panelFotoJugador1.remove(this.gandalfNormal);
 		}
 	}
-
-	private void indicarAnomalia() {
-		if(control.verTurno()==1)this.anomaliaUno.setText(this.control.indicarAnomalia());
-		if(control.verTurno()==2)this.anomaliaDos.setText(this.control.indicarAnomalia());
-	}	
 }
 
