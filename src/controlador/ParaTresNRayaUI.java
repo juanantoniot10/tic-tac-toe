@@ -55,7 +55,10 @@ public class ParaTresNRayaUI extends TresNRayaUI{
 				if(!this.control.mover) {
 					this.botones.botones[this.control.origenx][this.control.origeny].setBackground(new Color(152, 251, 152));
 				}
-				else this.botones.botones[this.control.origenx][this.control.origeny].setBackground(null);
+				else {
+//					this.botones.botones[coordenadaAnomaliax][coordenadaAnomaliay].setBackground(null);
+					this.botones.botones[this.control.origenx][this.control.origeny].setBackground(null);
+				}
 				if(control.comprobarTresEnRaya()) {
 					finalizar();
 				}
