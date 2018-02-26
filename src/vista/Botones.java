@@ -32,7 +32,7 @@ public class Botones extends JPanel {
 			for (int j = 0; j < this.botones[i].length; j++) {
 				this.botones[i][j] = new JButton(" ");
 				this.botones[i][j].setName(String.valueOf(i)+String.valueOf(j));
-				this.botones[i][j].setFont(new Font("Wide Latin", Font.PLAIN, 20));
+				this.botones[i][j].setFont(new Font("Wide Latin", Font.PLAIN, 15));
 				this.botones[i][j].setHorizontalTextPosition(SwingConstants.CENTER);
 				JPanel panelBoton = new JPanel();
 				panelBoton.setLayout(new CardLayout(0, 0));

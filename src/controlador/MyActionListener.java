@@ -18,6 +18,5 @@ public class MyActionListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		paraTresNRayaUI.jugar(((JButton)e.getSource()).getName());
-		if (control.comprobarTresEnRaya())new TresNRaya();
 	}
 }

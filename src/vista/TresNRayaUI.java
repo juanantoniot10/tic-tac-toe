@@ -47,6 +47,9 @@ public class TresNRayaUI extends JFrame {
 	 * Create the frame.
 	 */
 	public TresNRayaUI() {
+		setMinimumSize(new Dimension(700, 500));
+		setSize(new Dimension(1800, 1800));
+		setPreferredSize(new Dimension(1800, 1800));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -77,7 +80,7 @@ public class TresNRayaUI extends JFrame {
 		panelIzquierda.add(panelJugadorUno);
 		panelJugadorUno.setLayout(new BoxLayout(panelJugadorUno, BoxLayout.Y_AXIS));
 		
-		nombreJugadorUno=new JLabel("                     JUGADOR 1                     ");
+		nombreJugadorUno=new JLabel("JUGADOR O");
 		panelJugadorUno.add(nombreJugadorUno);
 		nombreJugadorUno.setBackground(new Color(100, 149, 237));
 		
@@ -92,6 +95,7 @@ public class TresNRayaUI extends JFrame {
 		panelFotoJugador1.add(gandalfNormal);
 		
 		anomaliaUno= new JLabel(""); 
+		anomaliaUno.setBackground(new Color(255, 99, 71));
 		panelJugadorUno.add(anomaliaUno);
 		
 		panelJugadorDos = new JPanel();
@@ -99,7 +103,7 @@ public class TresNRayaUI extends JFrame {
 		panelIzquierda.add(panelJugadorDos);
 		panelJugadorDos.setLayout(new BoxLayout(panelJugadorDos, BoxLayout.Y_AXIS));
 		
-		nombreJugadorDos= new JLabel("JUGADOR 2");
+		nombreJugadorDos= new JLabel("JUGADOR X");
 		panelJugadorDos.add(nombreJugadorDos);
 		nombreJugadorDos.setBackground(new Color(143, 188, 143));
 		
@@ -113,6 +117,7 @@ public class TresNRayaUI extends JFrame {
 		panelJugadorDos.add(panelFotoJugador2);
 		
 		anomaliaDos=new JLabel("");
+		anomaliaDos.setBackground(new Color(255, 99, 71));
 		panelJugadorDos.add(anomaliaDos);
 		
 		JPanel panelCentral = new JPanel();

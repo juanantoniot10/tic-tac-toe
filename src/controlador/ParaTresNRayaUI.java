@@ -13,6 +13,8 @@ public class ParaTresNRayaUI extends TresNRayaUI{
 	TresNRaya control;
 	MyActionListener listener=new MyActionListener(control,this);
 	String coordenada;
+	private int coordenadaAnomaliax;
+	private int coordenadaAnomaliay;
 	
 	
 	public ParaTresNRayaUI() {
@@ -39,19 +41,24 @@ public class ParaTresNRayaUI extends TresNRayaUI{
 	}
 
 	public void jugar(String coordenada) {
-	
 			control.destinox=Integer.valueOf(String.valueOf(coordenada.charAt(0)));
 			control.destinoy=Integer.valueOf(String.valueOf(coordenada.charAt(1)));
 			if(control.realizarJugada()) {
+				this.botones.botones[coordenadaAnomaliax][coordenadaAnomaliay].setBackground(null);
 				this.mensaje.setText(this.control.muestraLetrero());
-				this.anomaliaDos.setText("");
-				this.anomaliaUno.setText("");
+				if(!this.control.mover) {
+					this.botones.botones[this.control.origenx][this.control.origeny].setBackground(new Color(152, 251, 152));
+				}
+				else this.botones.botones[this.control.origenx][this.control.origeny].setBackground(null);
 				if(control.comprobarTresEnRaya()) {
 					finalizar();
 				}
 			}
 			else {
-				indicarAnomalia();
+				mensaje.setText(this.control.indicarAnomalia());
+				coordenadaAnomaliax=this.control.destinox;
+				coordenadaAnomaliay=this.control.destinoy;
+				this.botones.botones[coordenadaAnomaliax][coordenadaAnomaliay].setBackground(new Color(255, 235, 205));
 			}
 			pintarBotonera();
 		
