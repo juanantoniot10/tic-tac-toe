@@ -49,21 +49,25 @@ public class ParaTresNRayaUI extends TresNRayaUI{
 	public void jugar(String coordenada) {
 			control.destinox=Integer.valueOf(String.valueOf(coordenada.charAt(0)));
 			control.destinoy=Integer.valueOf(String.valueOf(coordenada.charAt(1)));
+			mensaje.getParent().setBackground(null);
+			this.botones.botones[coordenadaAnomaliax][coordenadaAnomaliay].setBackground(null);
 			if(control.realizarJugada()) {
-				this.botones.botones[coordenadaAnomaliax][coordenadaAnomaliay].setBackground(null);
 				this.mensaje.setText(this.control.muestraLetrero());
 				if(!this.control.mover) {
 					this.botones.botones[this.control.origenx][this.control.origeny].setBackground(new Color(152, 251, 152));
+					mensaje.getParent().setBackground(null);
 				}
 				else {
 //					this.botones.botones[coordenadaAnomaliax][coordenadaAnomaliay].setBackground(null);
 					this.botones.botones[this.control.origenx][this.control.origeny].setBackground(null);
+					mensaje.getParent().setBackground(null);
 				}
 				if(control.comprobarTresEnRaya()) {
 					finalizar();
 				}
 			}
 			else {
+				mensaje.getParent().setBackground(new Color(255, 235, 205));
 				mensaje.setText(this.control.indicarAnomalia());
 				coordenadaAnomaliax=this.control.destinox;
 				coordenadaAnomaliay=this.control.destinoy;

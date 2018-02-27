@@ -8,7 +8,6 @@ import javax.swing.JButton;
 public class MyActionListener implements ActionListener {
 	TresNRaya control;
 	ParaTresNRayaUI paraTresNRayaUI;
-	
 	public MyActionListener(TresNRaya control, ParaTresNRayaUI paraTresNRayaUI) {
 		super();
 		this.control = control;
