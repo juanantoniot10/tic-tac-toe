@@ -17,6 +17,7 @@ public class ParaTresNRayaUI extends TresNRayaUI{
 	String coordenada;
 	private int coordenadaAnomaliax;
 	private int coordenadaAnomaliay;
+	private boolean finalizado;
 	
 	
 	public ParaTresNRayaUI() {
@@ -47,44 +48,56 @@ public class ParaTresNRayaUI extends TresNRayaUI{
 	}
 
 	public void jugar(String coordenada) {
-			control.destinox=Integer.valueOf(String.valueOf(coordenada.charAt(0)));
-			control.destinoy=Integer.valueOf(String.valueOf(coordenada.charAt(1)));
-			mensaje.getParent().setBackground(null);
-			this.botones.botones[coordenadaAnomaliax][coordenadaAnomaliay].setBackground(null);
-			if(control.realizarJugada()) {
-				this.mensaje.setText(this.control.muestraLetrero());
-				if(!this.control.mover) {
-					this.botones.botones[this.control.origenx][this.control.origeny].setBackground(new Color(152, 251, 152));
-					mensaje.getParent().setBackground(null);
-				}
-				else {
-//					this.botones.botones[coordenadaAnomaliax][coordenadaAnomaliay].setBackground(null);
-					this.botones.botones[this.control.origenx][this.control.origeny].setBackground(null);
-					mensaje.getParent().setBackground(null);
-				}
-				if(control.comprobarTresEnRaya()) {
-					finalizar();
-				}
+		if(finalizado)reiniciar();
+		finalizado=false;
+		extraerDestino(coordenada);
+		eliminarColorAnomalia();
+		if(control.realizarJugada()) {
+			this.mensaje.setText(this.control.muestraLetrero());
+			if(!this.control.mover) {
+				this.botones.botones[this.control.origenx][this.control.origeny].setBackground(new Color(152, 251, 152));
+				mensaje.getParent().setBackground(null);
 			}
 			else {
-				mensaje.getParent().setBackground(new Color(255, 235, 205));
-				mensaje.setText(this.control.indicarAnomalia());
-				coordenadaAnomaliax=this.control.destinox;
-				coordenadaAnomaliay=this.control.destinoy;
-				this.botones.botones[coordenadaAnomaliax][coordenadaAnomaliay].setBackground(new Color(255, 235, 205));
+				this.botones.botones[this.control.origenx][this.control.origeny].setBackground(null);
+				mensaje.getParent().setBackground(null);
 			}
-			pintarBotonera();
-		
-//		else if (control.numerojugada>7) {
-//			control.origenx=Integer.valueOf(String.valueOf(coordenada.charAt(0)));
-//			control.origeny=Integer.valueOf(String.valueOf(coordenada.charAt(1)));
-//			if(control.realizarJugada()) {
-//				this.mensaje.setText(control.muestraLetrero());
-//			}	
-//			else {
-//				this.anomaliaUno.setText(control.indicarAnomalia());
-//			}
-//		}
+			if(control.comprobarTresEnRaya()) {
+				finalizar();
+				finalizado=true;
+			}
+		}
+		else {
+			gestionarAnomalia();
+		}
+		pintarBotonera();
+	}
+
+	/**
+	 * 
+	 */
+	private void gestionarAnomalia() {
+		mensaje.getParent().setBackground(new Color(255, 235, 205));
+		mensaje.setText(this.control.indicarAnomalia());
+		coordenadaAnomaliax=this.control.destinox;
+		coordenadaAnomaliay=this.control.destinoy;
+		this.botones.botones[coordenadaAnomaliax][coordenadaAnomaliay].setBackground(new Color(255, 235, 205));
+	}
+
+	/**
+	 * 
+	 */
+	private void eliminarColorAnomalia() {
+		mensaje.getParent().setBackground(null);
+		this.botones.botones[coordenadaAnomaliax][coordenadaAnomaliay].setBackground(null);
+	}
+
+	/**
+	 * @param coordenada
+	 */
+	private void extraerDestino(String coordenada) {
+		control.destinox=Integer.valueOf(String.valueOf(coordenada.charAt(0)));
+		control.destinoy=Integer.valueOf(String.valueOf(coordenada.charAt(1)));
 	}
 
 	private void finalizar() {
@@ -96,8 +109,8 @@ public class ParaTresNRayaUI extends TresNRayaUI{
 			this.panelFotoJugador2.setBackground(new Color(255, 160, 122));
 			this.panelFotoJugador2.add(this.sarumanEnfadado);
 			this.panelFotoJugador2.remove(this.sarumanNormal);
-			this.panelFotoJugador1.remove(this.gandalfNormal);
-			this.panelFotoJugador1.add(this.gandalfGanador);
+//			this.panelFotoJugador1.remove(this.gandalfNormal);
+//			this.panelFotoJugador1.add(this.gandalfGanador);
 		}
 		if(control.verTurno()==2) {
 			this.anomaliaDos.setText("HAS GANADO");
@@ -108,6 +121,29 @@ public class ParaTresNRayaUI extends TresNRayaUI{
 			this.panelFotoJugador1.add(this.galdalfEnfadado);
 			this.panelFotoJugador1.remove(this.gandalfNormal);
 		}
+	}
+	private void reiniciar() {
+		if(control.verTurno()==1) {
+			this.anomaliaUno.setText("");
+			this.panelJugadorDos.setBackground(null);
+			this.panelJugadorUno.setBackground(null);
+			this.panelFotoJugador1.setBackground(null);
+			this.panelFotoJugador2.setBackground(null);
+			this.panelFotoJugador2.remove(this.sarumanEnfadado);
+			this.panelFotoJugador2.add(this.sarumanNormal);
+			this.panelFotoJugador1.add(this.gandalfNormal);
+			this.panelFotoJugador1.remove(this.gandalfGanador);
+		}
+		if(control.verTurno()==2) {
+			this.anomaliaDos.setText("HAS GANADO");
+			this.panelJugadorUno.setBackground(null);
+			this.panelJugadorDos.setBackground(null);
+			this.panelFotoJugador2.setBackground(null);
+			this.panelFotoJugador1.setBackground(null);
+			this.panelFotoJugador1.remove(this.galdalfEnfadado);
+			this.panelFotoJugador1.add(this.gandalfNormal);
+		}
+		control = new TresNRaya();
 	}
 }
 
